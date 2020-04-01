@@ -16,14 +16,15 @@ mongoose.connect(keys.mongoURI); //connect to mongoDB Client
 const app = express(); //Express app created
 
 app.use(
+	//Tell Express app to use cookieSession and configure it here
 	cookieSession({
 		maxAge: 30 * 24 * 60 * 60 * 1000,
 		keys: [keys.cookieKey] //encrypt keys
 	})
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize()); //app to use and Initialize passport
+app.use(passport.session()); //app to use and initialize session
 
 authRoutes(app); // arrow function attached with module.exports in authRoutes.js is called using @app parameter
 
